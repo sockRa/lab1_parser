@@ -17,10 +17,6 @@
 /**********************************************************************/
 /* OBJECT ATTRIBUTES FOR THIS OBJECT (C MODULE)                       */
 /**********************************************************************/
-static int flag = 0;
-static int varFlag = 0;
-static int beginFlag = 0;
-static int alternator;
 /**********************************************************************/
 /* type definitions                                                   */
 /**********************************************************************/
@@ -108,51 +104,8 @@ toktyp lex2tok(char * fplex)
 {
 	int i = 0;
 	
-	if(isdigit(*fplex))
-		return number;
-	
-	// if(!strcmp(fplex,"var"))
-	// 	varFlag = 1;
-
-	// if(varFlag){
-
-	// 	if(flag){
-	// 		flag = 0;
-	// 		return id;
-	// 	}
-		
-	// 	if(!strcmp(fplex,","))
-	// 		flag = 1;
-	// }
-
-	// if(!strcmp(fplex,"end"))
-	// 	beginFlag = 0;
-
-	// if(beginFlag){ //&& alternator % 2 == 0){
-	// 	if(isalnum(*fplex)){
-	// 		if(isdigit(*fplex))
-	// 			return number;
-	// 		else
-	// 			return id;
-	// 	}
-	// }
-
-	// alternator++;
-
-	// if(!strcmp(fplex,":=")){
-	// 	beginFlag = 1;
-	// 	varFlag = 0;
-	// 	//alternator = 0;
-	// }
-
-
-	while(keywordtab[i].token != -1){
-		if(strcmp(fplex, keywordtab[i].text) == 0)
-			return keywordtab[i].token;
-		i++;
-	}
-
-	i = 0;
+	// if(isdigit(*fplex))
+	// 	return number;
 
 	while(tokentab[i].token != -1){
 		if(strcmp(fplex, tokentab[i].text) == 0)
