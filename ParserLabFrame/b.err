@@ -1,0 +1,75 @@
+lexer.c:55:13: warning: ‘get_char’ defined but not used [-Wunused-function]
+ static void get_char()
+             ^~~~~~~~
+lexer.c:46:13: warning: ‘pbuffer’ defined but not used [-Wunused-function]
+ static void pbuffer()
+             ^~~~~~~
+lexer.c:37:13: warning: ‘get_prog’ defined but not used [-Wunused-function]
+ static void get_prog()
+             ^~~~~~~~
+lexer.c:25:13: warning: ‘plex’ defined but not used [-Wunused-variable]
+ static int  plex  = 0;               /* current index lexeme  buffer  */
+             ^~~~
+lexer.c:24:13: warning: ‘pbuf’ defined but not used [-Wunused-variable]
+ static int  pbuf  = 0;               /* current index program buffer  */
+             ^~~~
+lexer.c:23:13: warning: ‘lexbuf’ defined but not used [-Wunused-variable]
+ static char lexbuf[LEXSIZE];
+             ^~~~~~
+lexer.c:22:13: warning: ‘buffer’ defined but not used [-Wunused-variable]
+ static char buffer[BUFSIZE];
+             ^~~~~~
+symtab.c:92:13: warning: ‘p_symrow’ defined but not used [-Wunused-function]
+ static void p_symrow(int ftref)
+             ^~~~~~~~
+symtab.c:80:13: warning: ‘get_ref’ defined but not used [-Wunused-function]
+  static int get_ref(char * fpname)
+             ^~~~~~~
+symtab.c:68:13: warning: ‘initst’ defined but not used [-Wunused-function]
+ static void initst()
+             ^~~~~~
+symtab.c:54:13: warning: ‘set_addr’ defined but not used [-Wunused-function]
+ static void set_addr(int ftref, int    faddr)  { addr[ftref] = faddr; }
+             ^~~~~~~~
+symtab.c:53:13: warning: ‘set_size’ defined but not used [-Wunused-function]
+ static void set_size(int ftref, int    fsize)  { size[ftref] = fsize; }
+             ^~~~~~~~
+symtab.c:52:13: warning: ‘set_type’ defined but not used [-Wunused-function]
+ static void set_type(int ftref, toktyp ftype)  { type[ftref] = ftype; }
+             ^~~~~~~~
+symtab.c:51:13: warning: ‘set_role’ defined but not used [-Wunused-function]
+ static void set_role(int ftref, toktyp frole)  { role[ftref] = frole; }
+             ^~~~~~~~
+symtab.c:49:13: warning: ‘set_name’ defined but not used [-Wunused-function]
+ static void set_name(int ftref, char * fpname) { strcpy(name[ftref],
+             ^~~~~~~~
+symtab.c:44:15: warning: ‘get_addr’ defined but not used [-Wunused-function]
+ static int    get_addr(int ftref)   { return addr[ftref]; }
+               ^~~~~~~~
+symtab.c:43:15: warning: ‘get_size’ defined but not used [-Wunused-function]
+ static int    get_size(int ftref)   { return size[ftref]; }
+               ^~~~~~~~
+symtab.c:42:15: warning: ‘get_type’ defined but not used [-Wunused-function]
+ static toktyp get_type(int ftref)   { return type[ftref]; }
+               ^~~~~~~~
+symtab.c:41:15: warning: ‘get_role’ defined but not used [-Wunused-function]
+ static toktyp get_role(int ftref)   { return role[ftref]; }
+               ^~~~~~~~
+symtab.c:40:15: warning: ‘get_name’ defined but not used [-Wunused-function]
+ static char * get_name(int ftref)   { return name[ftref]; }
+               ^~~~~~~~
+symtab.c:32:12: warning: ‘startp’ defined but not used [-Wunused-variable]
+ static int startp =0;                  /* start position program in ST*/
+            ^~~~~~
+symtab.c:31:12: warning: ‘numrows’ defined but not used [-Wunused-variable]
+ static int numrows=0;                  /* number of rows in the ST    */
+            ^~~~~~~
+keytoktab.c:56:12: warning: ‘keywordtab’ defined but not used [-Wunused-variable]
+ static tab keywordtab[ ] = {
+            ^~~~~~~~~~
+keytoktab.c:31:12: warning: ‘tokentab’ defined but not used [-Wunused-variable]
+ static tab tokentab[ ] = {
+            ^~~~~~~~
+optab.c:22:12: warning: ‘optab’ defined but not used [-Wunused-variable]
+ static int optab[][NENTS] = {
+            ^~~~~
