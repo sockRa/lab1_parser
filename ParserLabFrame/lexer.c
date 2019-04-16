@@ -40,7 +40,7 @@ static void get_prog()
 {
 
    //ANVÄND BARA DENNA VID DEBUG
-   FILE *fp = fopen("mytests/sem2.pas", "r");
+   FILE *fp = fopen("TestSuite/sem3.pas", "r");
    ///////////////////////////////////////
 
    // FILE *fp = stdin;
@@ -57,6 +57,7 @@ static void get_prog()
       buffer[newLen++] = '$';
       buffer[newLen++] = '\0';
    }
+   
    fclose(fp);
 }     
 

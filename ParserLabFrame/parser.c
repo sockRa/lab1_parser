@@ -42,8 +42,8 @@ static void match(int t)
    if (lookahead == t) lookahead = get_token();
    else {
       is_parse_ok=0;
-      printf("\n *** Unexpected Token: expected %4s found %4s (in match)",
-              tok2lex(t), get_lexeme());
+      // printf("\n *** Unexpected Token: expected %4s found %4s (in match)",
+      //         tok2lex(t), get_lexeme());
       }
    }
 
@@ -56,12 +56,44 @@ static void match(int t)
 static void expr();
 //////////////////////
 
+static void syntaxErrorExpected(char *arg1){
+
+   printf("\nSYNTAX:   Symbol expected %s found %s",arg1,get_lexeme());
+}
+
 static void program_header()
 {
    if (DEBUG) printf("\n *** In  program_header");
-   match(program);  addp_name(get_lexeme()); 
-   match(id); match('('); match(input);
-   match(','); match(output); match(')'); match(';');
+
+   if(lookahead != program)
+      syntaxErrorExpected("program");
+   match(program);
+
+   if(lookahead != id){
+      syntaxErrorExpected("ID");
+      addp_name("???");
+   }else
+      addp_name(get_lexeme());
+
+   match(id);
+   
+   if(lookahead != '(')
+      syntaxErrorExpected("(");
+   match('(');
+
+   if(lookahead != input)
+      syntaxErrorExpected("input"); 
+   match(input);
+
+   if(lookahead != ',')
+      syntaxErrorExpected(",");
+   match(',');
+
+   if(lookahead != output)
+      syntaxErrorExpected("output");
+   match(output); 
+   match(')'); 
+   match(';');
    if (DEBUG) printf("\n *** Out  program_header\n");
 }
    
@@ -71,13 +103,16 @@ static void program_header()
 /*##############  VAR_PART ###########*/
 static void type(){
    if (DEBUG) printf("\n *** In  type");
+   
    setv_type(lookahead);
    if(lookahead == integer)
       match(integer);
    else if(lookahead == real)
       match(real);
-   else
+   else if(lookahead == boolean)
       match(boolean);
+   else
+      printf("\nSYNTAX:   Type name expected found %s",get_lexeme());
 
    if (DEBUG) printf("\n *** Out  type");
 }
@@ -102,9 +137,18 @@ static void id_list(){
 static void var_deck(){
    if (DEBUG) printf("\n *** In  var_deck");
    id_list();
-   match(':');
+
+   if(lookahead == ':')
+      match(':');
+   else
+      syntaxErrorExpected(":");
+
    type();
-   match(';');
+
+   if(lookahead == ';')
+      match(';');
+   else
+      syntaxErrorExpected(";");
 
    if (DEBUG) printf("\n *** Out  var_deck");
 }
@@ -234,6 +278,11 @@ int parser()
 {
    if (DEBUG) printf("\n *** In  program");
    lookahead = get_token();        // get the first token
+   if(strcmp(get_lexeme(),"$") == 0){
+      printf("\nWARNING:  Input file is empty");
+      return is_parse_ok;
+   }
+
    program_header();               // call the first grammar rule
    var_part();                     // call the second grammar rule
    stat_part();                    // call the third grammar rule
