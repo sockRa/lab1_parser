@@ -40,7 +40,7 @@ static void get_prog()
 {
 
    //ANVÄND BARA DENNA VID DEBUG
-   FILE *fp = fopen("mytests/testok6.pas", "r");
+   FILE *fp = fopen("mytests/sem2.pas", "r");
    ///////////////////////////////////////
 
    // FILE *fp = stdin;
@@ -111,22 +111,37 @@ int get_token()
       while(buffer[pbuf] == ' ' || buffer[pbuf] == '\n' || buffer[pbuf] == '\r')
          pbuf++;
 
-      if(isalnum(buffer[pbuf]) == 0 ){
-            get_char();
-            if(lexbuf[plex - 1] == ':' && buffer[pbuf] == '=')
-               get_char();
-      }
-     
-      else{
-         while(isalnum(buffer[pbuf]))
+      //Om siffra, retunera number
+      if(isdigit(buffer[pbuf])){
          get_char();
+         return number;
       }
-   
+      //Om alphanum, kolla om det tillhör keyword eller inte
+      else if(isalnum(buffer[pbuf])){
+            while(isalnum(buffer[pbuf]))  //Hämtar in hela ordet
+               get_char();
+            
+            if(buffer[pbuf + 1] == ':' || buffer[pbuf + 1] == '+' || buffer[pbuf + 1] == '*')
+               return id;
+            
+            else if(strcmp(lexbuf,"input") == 0 || strcmp(lexbuf,"output") == 0)
+               return key2tok(lexbuf);
 
-   if(!strcmp(lexbuf,"program") || !strcmp(lexbuf,"input") || !strcmp(lexbuf,"output") || !strcmp(lexbuf,"begin") || !strcmp(lexbuf,"end")) 
-     token = key2tok(lexbuf);
-   else
-     token = lex2tok(lexbuf);
+            else if((buffer[pbuf] == '(' || buffer[pbuf] == ',' || buffer[pbuf] == ':' || buffer[pbuf] == ')'))
+               return id;
+            else
+               return key2tok(lexbuf);
+            
+
+      }else{
+         get_char();
+         if(lexbuf[plex - 1] == ':' && buffer[pbuf] == '='){
+            get_char();
+            return assign;
+         }
+      }
+
+      token = lex2tok(lexbuf);
    
    return token; 
 

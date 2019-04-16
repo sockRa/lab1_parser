@@ -20,36 +20,13 @@
 /**********************************************************************/
 /* OBJECT ATTRIBUTES FOR THIS OBJECT (C MODULE)                       */
 /**********************************************************************/
-#define DEBUG 1
-static int  lookahead=0;
-static int  is_parse_ok=1;
+#define DEBUG 0
+static int  lookahead = 0;
+static int  is_parse_ok = 1;
+toktyp op,arg1,arg2,returnType,compareType;
 
-/**********************************************************************/
-/* RAPID PROTOTYPING - simulate the token stream & lexer (get_token)  */
-/**********************************************************************/
-/* define tokens + keywords NB: remove this when keytoktab.h is added */
-/**********************************************************************/
-// enum tvalues { program = 257, id, input, output, var, integer, begin,
-//  define, digit, end };
-/**********************************************************************/
-/* Simulate the token stream for a given program                      */
-/**********************************************************************/
-// static int tokens[] = {program, id, '(', input, ',', output, ')', ';',
-// var, id, ',', id, ',', id, ':', integer, ';', begin, id, assign, id, '+',
-// id, '*', number, end, '.', '$' };
 
-// /**********************************************************************/
-// /*  Simulate the lexer -- get the next token from the buffer          */
-// /**********************************************************************/
-// static int pget_token()
-// {  
-//    // static int i=0;
-//    // if (tokens[i] != '$') return tokens[i++]; else return '$';
-//    static int i = 0, t = 0;
-   
-//    for(i = 0; t != '$'; i++)
-//       printf("\n token is %4d, lexeme is %10s ", t = get_token(), get_lexeme());
-// }
+
 
 /**********************************************************************/
 /*  PRIVATE METHODS for this OBJECT  (using "static" in C)            */
@@ -107,7 +84,12 @@ static void type(){
 
 static void id_list(){
    if (DEBUG) printf("\n *** In  id_list");
-   addv_name(get_lexeme());
+
+   if(find_name(get_lexeme()))
+      printf("\nSEMANTIC: ID already declared: %s", get_lexeme());
+   else
+      addv_name(get_lexeme());
+
    match(id);
    if(lookahead == ','){
       match(',');
@@ -150,11 +132,21 @@ static void var_part(){
 static void operant(){
    if (DEBUG) printf("\n *** In  operant");
 
-   if(lookahead == id)
+   if(lookahead == id){
+      if(!find_name(get_lexeme()))
+         printf("\nSEMANTIC: ID NOT declared: %s",get_lexeme());
+
+      if(arg1 != 0)
+         arg2 = get_ntype(get_lexeme());
+      else
+         arg1 = get_ntype(get_lexeme());
       match(id);
+      
+   }
    else
       match(number);
    
+
    if (DEBUG) printf("\n *** Out  operant");
 }
 
@@ -166,7 +158,8 @@ static void factor(){
       expr();
       match(')');
    }
-   operant();
+   else
+      operant();
 
    if (DEBUG) printf("\n *** Out  factor");
 }
@@ -175,6 +168,7 @@ static void term(){
    if (DEBUG) printf("\n *** In  term");
    factor();
    if(lookahead == '*'){
+      //op = lookahead;
       match('*');
       term();
    }
@@ -185,6 +179,7 @@ static void expr(){
    if (DEBUG) printf("\n *** In  expr");
    term();
    if(lookahead == '+'){
+      op = lex2tok(get_lexeme());
       match('+');
       expr();
    }
@@ -193,9 +188,16 @@ static void expr(){
 
 static void assign_stat(){
    if (DEBUG) printf("\n *** In  assign_stat");
+   compareType = get_ntype(get_lexeme());
+
    match(id);
    match(assign);
    expr();
+
+   returnType = get_otype(op,arg1,arg2);
+   if(compareType != returnType)
+      printf("\nSEMANTIC: Assign types: %s := %s",tok2lex(compareType),tok2lex(returnType));
+   
    if (DEBUG) printf("\n *** Out  assign_stat\n");
 }
 
