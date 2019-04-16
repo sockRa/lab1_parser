@@ -40,7 +40,7 @@ static void get_prog()
 {
 
    //ANVÄND BARA DENNA VID DEBUG
-   FILE *fp = fopen("TestSuite/sem3.pas", "r");
+   FILE *fp = fopen("TestSuite/testm.pas", "r");
    ///////////////////////////////////////
 
    // FILE *fp = stdin;

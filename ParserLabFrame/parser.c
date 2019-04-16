@@ -42,8 +42,6 @@ static void match(int t)
    if (lookahead == t) lookahead = get_token();
    else {
       is_parse_ok=0;
-      // printf("\n *** Unexpected Token: expected %4s found %4s (in match)",
-      //         tok2lex(t), get_lexeme());
       }
    }
 
@@ -92,7 +90,13 @@ static void program_header()
    if(lookahead != output)
       syntaxErrorExpected("output");
    match(output); 
-   match(')'); 
+
+   if(lookahead != ')')
+      syntaxErrorExpected(")");
+   match(')');
+
+   if(lookahead != ';')
+      syntaxErrorExpected(";"); 
    match(';');
    if (DEBUG) printf("\n *** Out  program_header\n");
 }
@@ -122,10 +126,15 @@ static void id_list(){
 
    if(find_name(get_lexeme()))
       printf("\nSEMANTIC: ID already declared: %s", get_lexeme());
-   else
+      
+   if(lookahead != id)
+      printf("\nSYNTAX    ID expected found %s",get_lexeme());
+   else{
       addv_name(get_lexeme());
+      match(id);
+   }
+      
 
-   match(id);
    if(lookahead == ','){
       match(',');
       id_list();
@@ -166,6 +175,8 @@ static void var_part(){
    if (DEBUG) printf("\n *** In  var_part");
    if(lookahead == var)
       match(var);
+   else
+      syntaxErrorExpected("var");
    var_dec_list();
 
    if (DEBUG) printf("\n *** out  var_part\n");
@@ -233,8 +244,13 @@ static void expr(){
 static void assign_stat(){
    if (DEBUG) printf("\n *** In  assign_stat");
    compareType = get_ntype(get_lexeme());
+   if(compareType == predef)
+      compareType = error;
 
+   if(!find_name(get_lexeme()))
+      printf("\nSEMANTIC: ID NOT declared: %s",get_lexeme());
    match(id);
+
    match(assign);
    expr();
 
