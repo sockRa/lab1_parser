@@ -1,17 +1,94 @@
-testing mytests/testok1.pas
+testing mytests/sem1.pas
 
+ *** In  program
 ________________________________________________________
  THE PROGRAM TEXT
 ________________________________________________________
-program testok1(input, output);  
-var A, B, C: integer;  
+program sem1(input, output);
+var A, B, C: integer;
 
 begin
-A := B + C * 2  
+A := D + C * 2  
 end.
-
 $
-________________________________________________________ 
+________________________________________________________
+ *** In  program_header
+ *** In  match expected program found program
+ *** In  match expected   id found sem1
+ *** In  match expected    ( found    (
+ *** In  match expected input found input
+ *** In  match expected    , found    ,
+ *** In  match expected output found output
+ *** In  match expected    ) found    )
+ *** In  match expected    ; found    ;
+ *** Out  program_header
+
+ *** In  var_part
+ *** In  match expected  var found  var
+ *** In  var_dec_list
+ *** In  var_deck
+ *** In  id_list
+ *** In  match expected   id found    A
+ *** In  match expected    , found    ,
+ *** In  id_list
+ *** In  match expected   id found    B
+ *** In  match expected    , found    ,
+ *** In  id_list
+ *** In  match expected   id found    C
+ *** Out  id_list
+ *** Out  id_list
+ *** Out  id_list
+ *** In  match expected    : found    :
+ *** In  type
+ *** In  match expected integer found integer
+ *** Out  type
+ *** In  match expected    ; found    ;
+ *** Out  var_deck
+ *** Out  var_dec_list
+ *** out  var_part
+
+ *** In  stat_part
+ *** In  match expected begin found begin
+ *** In  stat_list
+ *** In  stat
+ *** In  assign_stat
+ *** In  match expected   id found    A
+ *** In  match expected   := found   :=
+ *** In  expr
+ *** In  term
+ *** In  factor
+ *** In  operant
+ *** In  match expected   id found    D
+ *** Out  operant
+ *** Out  factor
+ *** Out  term
+ *** In  match expected    + found    +
+ *** In  expr
+ *** In  term
+ *** In  factor
+ *** In  operant
+ *** In  match expected   id found    C
+ *** Out  operant
+ *** Out  factor
+ *** In  match expected    * found    *
+ *** In  term
+ *** In  factor
+ *** In  operant
+ *** In  match expected number found    2
+ *** Out  operant
+ *** Out  factor
+ *** Out  term
+ *** Out  term
+ *** Out  expr
+ *** Out  expr
+ *** Out  assign_stat
+
+ *** Out  stat
+ *** Out  stat_list
+ *** In  match expected  end found  end
+ *** In  match expected    . found    .
+ *** Out  stat_part
+ 
  PARSE SUCCESSFUL! 
 ________________________________________________________
 ________________________________________________________
@@ -19,189 +96,7 @@ ________________________________________________________
 ________________________________________________________
        NAME       ROLE       TYPE       SIZE       ADDR
 ________________________________________________________
-    testok1    program    program         12          0
-          A        var    integer          4          0
-          B        var    integer          4          4
-          C        var    integer          4          8
-________________________________________________________
-STATIC STORAGE REQUIRED is 12 BYTES
-________________________________________________________testing mytests/testok2.pas
-
-________________________________________________________
- THE PROGRAM TEXT
-________________________________________________________
-program testok2(input, output);
-var A, B, C: integer;  
-    D, E, F: integer;
-    G, H, I: integer;
-
-begin
-A := B + C * 2;
-D := E + F * 2;
-G := H + I * 2
-end.
-$
-________________________________________________________ 
- PARSE SUCCESSFUL! 
-________________________________________________________
-________________________________________________________
- THE SYMBOL TABLE
-________________________________________________________
-       NAME       ROLE       TYPE       SIZE       ADDR
-________________________________________________________
-    testok2    program    program         36          0
-          A        var    integer          4          0
-          B        var    integer          4          4
-          C        var    integer          4          8
-          D        var    integer          4         12
-          E        var    integer          4         16
-          F        var    integer          4         20
-          G        var    integer          4         24
-          H        var    integer          4         28
-          I        var    integer          4         32
-________________________________________________________
-STATIC STORAGE REQUIRED is 36 BYTES
-________________________________________________________testing mytests/testok3.pas
-
-________________________________________________________
- THE PROGRAM TEXT
-________________________________________________________
-program testok3(input, output);
-var A, B, C: integer;  
-
-begin
-A := 2 + 6 * 8;
-B := 3 + 9 * 1;
-C := 4 + 1 * 1
-end.
-$
-________________________________________________________ 
- PARSE SUCCESSFUL! 
-________________________________________________________
-________________________________________________________
- THE SYMBOL TABLE
-________________________________________________________
-       NAME       ROLE       TYPE       SIZE       ADDR
-________________________________________________________
-    testok3    program    program         12          0
-          A        var    integer          4          0
-          B        var    integer          4          4
-          C        var    integer          4          8
-________________________________________________________
-STATIC STORAGE REQUIRED is 12 BYTES
-________________________________________________________testing mytests/testok4.pas
-
-________________________________________________________
- THE PROGRAM TEXT
-________________________________________________________
-program testok4(input, output);
-var A, B, C: integer;  
-    DD, EE, FF: integer;
-
-begin
-A := B + C * 2  
-end.
-$
-________________________________________________________ 
- PARSE SUCCESSFUL! 
-________________________________________________________
-________________________________________________________
- THE SYMBOL TABLE
-________________________________________________________
-       NAME       ROLE       TYPE       SIZE       ADDR
-________________________________________________________
-    testok4    program    program         24          0
-          A        var    integer          4          0
-          B        var    integer          4          4
-          C        var    integer          4          8
-         DD        var    integer          4         12
-         EE        var    integer          4         16
-         FF        var    integer          4         20
-________________________________________________________
-STATIC STORAGE REQUIRED is 24 BYTES
-________________________________________________________testing mytests/testok5.pas
-
-________________________________________________________
- THE PROGRAM TEXT
-________________________________________________________
-program testok5(input, output);
-var x, y, z: integer;
-    A: integer;
-    B: integer;
-    C: integer;
-
-begin
-x := y + z * 2;
-A := B + C * 2  
-end.
-$
-________________________________________________________ 
- PARSE SUCCESSFUL! 
-________________________________________________________
-________________________________________________________
- THE SYMBOL TABLE
-________________________________________________________
-       NAME       ROLE       TYPE       SIZE       ADDR
-________________________________________________________
-    testok5    program    program         24          0
-          x        var    integer          4          0
-          y        var    integer          4          4
-          z        var    integer          4          8
-          A        var    integer          4         12
-          B        var    integer          4         16
-          C        var    integer          4         20
-________________________________________________________
-STATIC STORAGE REQUIRED is 24 BYTES
-________________________________________________________testing mytests/testok6.pas
-
-________________________________________________________
- THE PROGRAM TEXT
-________________________________________________________
-program testok6(input, output);
-var id, number, assign: integer;
-
-begin
-id := (number + assign) * 2  
-end.
-$
-________________________________________________________ 
- PARSE SUCCESSFUL! 
-________________________________________________________
-________________________________________________________
- THE SYMBOL TABLE
-________________________________________________________
-       NAME       ROLE       TYPE       SIZE       ADDR
-________________________________________________________
-    testok6    program    program         12          0
-         id        var    integer          4          0
-     number        var    integer          4          4
-     assign        var    integer          4          8
-________________________________________________________
-STATIC STORAGE REQUIRED is 12 BYTES
-________________________________________________________testing mytests/testok7.pas
-
-________________________________________________________
- THE PROGRAM TEXT
-________________________________________________________
-program testok7(input, output);
-var
-    A: integer;
-    B: integer;
-    C: integer;
-
-begin
-A := B + C * 2
-end.
-$
-________________________________________________________ 
- PARSE SUCCESSFUL! 
-________________________________________________________
-________________________________________________________
- THE SYMBOL TABLE
-________________________________________________________
-       NAME       ROLE       TYPE       SIZE       ADDR
-________________________________________________________
-    testok7    program    program         12          0
+       sem1    program    program         12          0
           A        var    integer          4          0
           B        var    integer          4          4
           C        var    integer          4          8
