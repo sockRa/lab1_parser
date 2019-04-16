@@ -104,9 +104,6 @@ toktyp lex2tok(char * fplex)
 {
 	int i = 0;
 	
-	// if(isdigit(*fplex))
-	// 	return number;
-
 	while(tokentab[i].token != -1){
 		if(strcmp(fplex, tokentab[i].text) == 0)
 			return tokentab[i].token;

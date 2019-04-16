@@ -39,11 +39,11 @@ static int  flag  = 0;               /* if get_prog has been called */
 static void get_prog()
 {
 
-   // //ANVÄND BARA DENNA VID DEBUG
-   // FILE *fp = fopen("mytests/testok6.pas", "r");
-   // ///////////////////////////////////////
+   //ANVÄND BARA DENNA VID DEBUG
+   FILE *fp = fopen("mytests/sem2.pas", "r");
+   ///////////////////////////////////////
 
-   FILE *fp = stdin;
+   // FILE *fp = stdin;
 
    if(fp == NULL){
       perror("Error while opening the file.\n");
