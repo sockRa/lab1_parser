@@ -21,7 +21,7 @@ int main()
    parser() ? printf(" \n PARSE SUCCESSFUL! \n")
             : printf(" \n PARSE FAILED! \n");
 
-   printf("________________________________________________________");
+   printf("\n________________________________________________________");
    p_symtab();
    return 1;
 }

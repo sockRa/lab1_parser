@@ -160,6 +160,9 @@ int find_name(char * fpname) {
 /**********************************************************************/
 void setv_type(toktyp ftype) {
    
+   if(find_name(tok2lex(ftype)) == 0)
+      ftype = error;
+
    for(int i = startp; i < numrows; i++)
       if(get_type(i) == undef){
          set_type(i, ftype);
