@@ -76,8 +76,6 @@ static void pbuffer()
 
 static void get_char()
 {  
-
-   
    lexbuf[plex] = buffer[pbuf];
    plex++;
    pbuf++;

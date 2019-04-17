@@ -129,14 +129,13 @@ void addp_name(char * fpname){
    initst();
    startp = numrows;
    addrow(fpname, program, program, 0, 0);
-   
-
 }
 
 /**********************************************************************/
 /*  Add a variable name to the symbol table                           */
 /**********************************************************************/
-void addv_name(char * fpname) { 
+void addv_name(char * fpname){ 
+
    addrow(fpname, var, undef, 0, 0);
 }
 
@@ -144,7 +143,7 @@ void addv_name(char * fpname) {
 /*  Find a name in the the symbol table                               */
 /*  return a Boolean (true, false) if the name is in the ST           */
 /**********************************************************************/
-int find_name(char * fpname) {
+int find_name(char * fpname){
 
    for(int i = 0; i < numrows; i++)
       if(strcmp(fpname, get_name(i)) == 0){
@@ -158,7 +157,7 @@ int find_name(char * fpname) {
 /**********************************************************************/
 /*  Set the type of an id list in the symbol table                    */
 /**********************************************************************/
-void setv_type(toktyp ftype) {
+void setv_type(toktyp ftype){
    
    if(find_name(tok2lex(ftype)) == 0)
       ftype = error;
@@ -171,14 +170,15 @@ void setv_type(toktyp ftype) {
       }
    
    set_size(startp, get_size(numrows - 1) + get_addr(numrows - 1));
-
-   
 }
 
 /**********************************************************************/
 /*  Get the type of a variable from the symbol table                  */
 /**********************************************************************/
-toktyp get_ntype(char * fpname) { return get_type(get_ref(fpname)); }
+toktyp get_ntype(char * fpname){ 
+
+   return get_type(get_ref(fpname)); 
+}
 
 /**********************************************************************/
 /* End of code                                                        */
