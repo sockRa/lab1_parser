@@ -39,11 +39,11 @@ static int  flag  = 0;               /* if get_prog has been called */
 static void get_prog()
 {
 
-   //ANVÄND BARA DENNA VID DEBUG
-   FILE *fp = fopen("TestSuite/sem3.pas", "r");
-   ///////////////////////////////////////
+   // //ANVÄND BARA DENNA VID DEBUG
+   // FILE *fp = fopen("TestSuite/fun1.pas", "r");
+   // ///////////////////////////////////////
 
-   // FILE *fp = stdin;
+   FILE *fp = stdin;
 
    if(fp == NULL){
       perror("Error while opening the file.\n");
@@ -67,11 +67,11 @@ static void get_prog()
 
 static void pbuffer()
 {   
-   printf("\n________________________________________________________");
+   printf("\n________________________________________________________ ");
    printf("\n THE PROGRAM TEXT");
-   printf("\n________________________________________________________\n");
+   printf("\n________________________________________________________ \n");
    printf("%s\n",buffer);
-   printf("________________________________________________________");
+   printf("________________________________________________________ ");
 }
 
 /**********************************************************************/
