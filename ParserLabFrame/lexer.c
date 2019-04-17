@@ -39,10 +39,6 @@ static int  flag  = 0;               /* if get_prog has been called */
 static void get_prog()
 {
 
-   // //ANVÄND BARA DENNA VID DEBUG
-   // FILE *fp = fopen("TestSuite/fun1.pas", "r");
-   // ///////////////////////////////////////
-
    FILE *fp = stdin;
 
    if(fp == NULL){
@@ -80,8 +76,6 @@ static void pbuffer()
 
 static void get_char()
 {  
-
-   
    lexbuf[plex] = buffer[pbuf];
    plex++;
    pbuf++;

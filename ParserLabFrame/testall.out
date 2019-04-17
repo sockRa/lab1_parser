@@ -39,7 +39,7 @@ begin
 end.
 $
 ________________________________________________________ 
-SYNTAX:   ID expected found 3
+SYNTAX:   ID expected found 3 
 SYNTAX:   Symbol expected := found 3 
 SEMANTIC: Assign types: error := integer
 SYNTAX:   Symbol expected end found A 
@@ -579,7 +579,7 @@ A := B + C * 2
 end.
 $
 ________________________________________________________ 
-SYNTAX    ID expected found ,
+SYNTAX:   ID expected found  , 
 SEMANTIC: ID NOT declared: A
 SEMANTIC: Assign types: error := integer
 ________________________________________________________ 
@@ -932,7 +932,7 @@ SYNTAX:   Symbol expected : found :=
 SYNTAX:   Type name expected found := 
 SYNTAX:   Symbol expected ; found := 
 SYNTAX:   Symbol expected begin found := 
-SYNTAX:   ID expected found :=
+SYNTAX:   ID expected found := 
 SEMANTIC: Assign types: error := integer
 ________________________________________________________ 
 ________________________________________________________ 
@@ -960,7 +960,7 @@ begin
 end.
 $
 ________________________________________________________ 
-SYNTAX:   ID expected found :=
+SYNTAX:   ID expected found := 
 SEMANTIC: Assign types: error := integer
 ________________________________________________________ 
 ________________________________________________________ 
@@ -1169,7 +1169,7 @@ begin
 end.
 $
 ________________________________________________________ 
-SYNTAX:   ID expected found end
+SYNTAX:   ID expected found end 
 SYNTAX:   Symbol expected := found end 
 SYNTAX:   Operand Expected 
 ________________________________________________________ 

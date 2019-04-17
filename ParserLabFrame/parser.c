@@ -54,7 +54,7 @@ static void match(int t)
 
 /*Function protoypes*/
 static void expr();
-//////////////////////
+
 
 static void syntaxErrorExpected(char *arg1){
 
@@ -62,6 +62,7 @@ static void syntaxErrorExpected(char *arg1){
 }
 
 static void printRemainder(){
+
    printf("\nSYNTAX:   Extra symbols after end of parse! \n ");
    printf("         ");
    while(lookahead != '$'){
@@ -80,7 +81,6 @@ static void program_header()
 
    if(lookahead != id){
       printf("\nSYNTAX:   ID expected found  %s ",get_lexeme());
-      // syntaxErrorExpected("ID");
       addp_name("???");
    }else
       addp_name(get_lexeme());
@@ -118,6 +118,7 @@ static void program_header()
 
 /*##############  VAR_PART ###########*/
 static void type(){
+
    if (DEBUG) printf("\n *** In  type");
    
    setv_type(lookahead);
@@ -134,11 +135,12 @@ static void type(){
 }
 
 static void id_list(){
+
    if (DEBUG) printf("\n *** In  id_list");
 
       
    if(lookahead != id)
-      printf("\nSYNTAX    ID expected found %s",get_lexeme());
+      printf("\nSYNTAX:   ID expected found  %s ",get_lexeme());
    else{
          if(find_name(get_lexeme()))
             printf("\nSEMANTIC: ID already declared: %s", get_lexeme());
@@ -157,6 +159,7 @@ static void id_list(){
 }
 
 static void var_deck(){
+
    if (DEBUG) printf("\n *** In  var_deck");
    id_list();
 
@@ -176,6 +179,7 @@ static void var_deck(){
 }
 
 static void var_dec_list(){
+
    if (DEBUG) printf("\n *** In  var_dec_list");
    var_deck();
    if(lookahead == id)
@@ -185,6 +189,7 @@ static void var_dec_list(){
 }
 
 static void var_part(){
+
    if (DEBUG) printf("\n *** In  var_part");
    if(lookahead == var)
       match(var);
@@ -198,6 +203,7 @@ static void var_part(){
 
 /*##############  STAT_PART ###########*/
 static void operant(){
+
    if (DEBUG) printf("\n *** In  operant");
 
    if(lookahead == id){
@@ -228,6 +234,7 @@ static void operant(){
 }
 
 static void factor(){
+
    if (DEBUG) printf("\n *** In  factor");
 
    if(lookahead == '('){
@@ -242,10 +249,10 @@ static void factor(){
 }
 
 static void term(){
+
    if (DEBUG) printf("\n *** In  term");
    factor();
    if(lookahead == '*'){
-      //op = lookahead;
       match('*');
       term();
    }
@@ -253,6 +260,7 @@ static void term(){
 }
 
 static void expr(){
+
    if (DEBUG) printf("\n *** In  expr");
    term();
    if(lookahead == '+'){
@@ -267,6 +275,7 @@ static void expr(){
 }
 
 static void assign_stat(){
+
    if (DEBUG) printf("\n *** In  assign_stat");
 
    if(!compareType && find_name(get_lexeme()))
@@ -280,9 +289,10 @@ static void assign_stat(){
       printf("\nSEMANTIC: ID NOT declared: %s",get_lexeme());
    }
    else
-      printf("\nSYNTAX:   ID expected found %s",get_lexeme());
+      printf("\nSYNTAX:   ID expected found %s ",get_lexeme());
    
    match(id);
+   
    if(strcmp(get_lexeme(),":=") != 0){
       syntaxErrorExpected(":=");
 
@@ -311,12 +321,14 @@ static void assign_stat(){
 }
 
 static void stat(){
+
    if (DEBUG) printf("\n *** In  stat");
    assign_stat();
    if (DEBUG) printf("\n *** Out  stat");
 }
 
 static void stat_list(){
+
    if (DEBUG) printf("\n *** In  stat_list");
    stat();
    if(lookahead == ';'){
@@ -327,6 +339,7 @@ static void stat_list(){
 }
 
 static void stat_part(){
+   
    if(DEBUG) printf("\n *** In  stat_part");
    
    if(lookahead != begin)
