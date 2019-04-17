@@ -54,7 +54,7 @@ static void match(int t)
 
 /*Function protoypes*/
 static void expr();
-//////////////////////
+
 
 static void syntaxErrorExpected(char *arg1){
 
@@ -80,7 +80,6 @@ static void program_header()
 
    if(lookahead != id){
       printf("\nSYNTAX:   ID expected found  %s ",get_lexeme());
-      // syntaxErrorExpected("ID");
       addp_name("???");
    }else
       addp_name(get_lexeme());
